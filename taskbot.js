@@ -34,13 +34,8 @@ var bot = new irc.Client(config.server, config.botName, {
 
 function tw(command, from){
   ding = exec("task", command, {timeout: 1000}, function (error, stdout, stderr) {
-      var result = stdout.split("\n");
-    result.forEach(function(x){
-      if ((typeof x === "string") && (x.length>0)){
-				console.log("response: ",from ,x);
-        bot.say(from, x);
-      }
-    })
+		console.log("response: ", from, stdout)
+		bot.say(from, stdout);
   });
 };
 
