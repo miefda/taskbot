@@ -54,7 +54,15 @@ bot.addListener("message", function(from, to, text3, message) {
   }
   if (text[0] === config.botName + ":") {
 		console.log("recieved: ", from, to, text3);
-    if (isBanned(text[1])){
+  if ("help".indexOf(text[1]) !== -1 ) {
+    try {
+      text.shift();
+      tw(text, from);
+    } catch(err){
+			console.log(err);
+      return bot.say(from , err.toString())
+		}
+	}else if (isBanned(text[1])){
 			console.log("response:  nope!")
 			return bot.say(to, "nope!");
     }else {
