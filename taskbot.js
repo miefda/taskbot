@@ -37,6 +37,7 @@ function tw(command, from){
       var result = stdout.split("\n");
     result.forEach(function(x){
       if ((typeof x === "string") && (x.length>0)){
+				console.log("response: ",from ,x);
         bot.say(from, x);
       }
     })
@@ -51,14 +52,17 @@ bot.addListener("message", function(from, to, text3, message) {
     text[i] = "";
   }
   }
+	console.log("recieved: ", from, to, text3);
   if (text[0] === config.botName + ":") {
     if (isBanned(text[1])){
+			console.log("response:  nope!")
 			return bot.say(to, "nope!");
     }else {
     try {
       text.shift();
       tw(text, to);
-    } catch(err) {
+    } catch(err){
+			console.log(err);
       return bot.say(from , err.toString())
     }}
   }
